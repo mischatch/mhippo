@@ -1,0 +1,95 @@
+.Oval {
+  width: 60px;
+  height: 60px;
+  background-color: #d8d8d8;
+  width: 60px;
+  height: 60px;
+  background-color: #d8d8d8;
+  position: absolute;
+  top: 109px;
+  left: 25px;
+  border-radius: 50%;
+}
+
+.Rectangle-2 {
+  width: 543px;
+  height: 540px;
+  border-radius: 30px;
+  background-color: #f8f8f8;
+  box-shadow: 0 16px 29px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.Add-New-Profile {
+  width: 213px;
+  height: 33px;
+  font-family: Roboto;
+  font-size: 28px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+  align-self: center;
+  margin: 50px 0 25px 0;
+}
+
+.Rectangle-4 {
+  width: 340px;
+  height: 31px;
+  color: #4a4a4a;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: solid 1px #bfbfbf;
+  padding: 0 0 0 10px;
+}
+
+.city-state {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 9px;
+}
+
+.city {
+  width: 250px;
+}
+
+.imageUpload {
+  border-radius: 50%;
+}
+
+.state {
+  width: 80px;
+  margin-left: 10px;
+}
+
+.Rectangle-2 > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Rectangle-2> form > input {
+  margin-bottom: 9px;
+  font-size: 16px;
+  padding: 0 0 0 10px;
+}
+
+textarea.Rectangle-4 {
+  width: 340px;
+  height: 110px;
+  font-size: 16px;
+  padding: 0 0 0 10px;
+}
+
+.ReactModal__Content {
+  border: none;
+  background: rgba(255, 255, 255, 0);
+  height: 600px;
+  z-index: 15;
+}

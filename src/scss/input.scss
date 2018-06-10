@@ -1,0 +1,37 @@
+.textbox-with-icon-container {
+  position: relative;
+
+  & .textbox {
+    padding-left: 3.1rem;
+  }
+
+  & .icon {
+    position: absolute;
+    left: .8rem;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    z-index: 1;
+  }
+}
+
+.textbox {
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  padding: .6rem 1rem;
+  border: 1px solid $lightGrey;
+  border-radius: 1rem;
+  position: relative;
+  background: #fff;
+
+  &::placeholder {
+    color: #000;
+    opacity: .28;
+  }
+
+  &--icon {
+    background: #fff url(/images/svg-assets.svg#search-icon);
+    background-position: .8rem center;
+    background-size: .8rem .8rem;
+  }
+}

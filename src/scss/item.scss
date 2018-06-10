@@ -1,0 +1,120 @@
+.body {
+  font-family: Roboto;
+}
+
+.profiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 20px;
+  width: 660px;
+  height: 250px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+}
+
+.image {
+  width: 130px;
+  height: 130px;
+}
+
+.image > img {
+  border-radius: 50%;
+}
+
+.info {
+  width: 390px;
+  margin-left: 30px;
+  position: relative;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 460px;
+}
+
+.profile-top-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: $darkGrey;
+}
+
+.name {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.occupation {
+  font-size: 17;
+  margin-bottom: 15px;
+}
+
+.location {
+  margin-bottom: 7px;
+  font-size: 13px;
+  color: $lightGrey;
+}
+
+.bio {
+  overflow: hidden;
+}
+
+.bio > p {
+  background: -webkit-linear-gradient(#333 70% , #eee 86%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  height: 60px;
+}
+
+button {
+  width: 118px;
+  height: 31px;
+  font-size: 14px;
+  font-weight: 100;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.btns {
+  position: relative;
+  margin-top: 12px;
+  position: absolute;
+  bottom: 0;
+}
+
+.btns > button:last-child {
+  margin-left: 96px;
+}
+
+.btns > button:first-child {
+  margin-right: 10px;
+}
+
+.main {
+  background: $mainColorLight;
+  color: white;
+}
+
+.empty {
+  background: white;
+  color: $mainColorLight;
+  border: 1px solid $mainColorLight;
+}
+
+.red {
+  background: white;
+  color: $darkRed;
+  border: 1px solid $darkRed;
+}
