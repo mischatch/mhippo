@@ -1,9 +1,11 @@
 import { initialProfilesData } from './initialProfilesData';
+import merge from 'lodash/merge';
 
 export const LOAD_PROFILES = 'profiles/LOAD_PROFILES';
 export const OPEN_MODAL = 'profiles/OPEN_MODAL';
 export const CLOSE_MODAL = 'profiles/CLOSE_MODAL';
 export const SEARCH_CHANGE = 'profiles/SEARCH_CHANGE';
+export const ADD_PROFILE = 'profiles/ADD_PROFILE';
 
 const initialState = {
   items: [],
@@ -18,7 +20,10 @@ export default (state = initialState, action) => {
         ...state,
         items: action.payload,
       };
-
+    case ADD_PROFILE:
+      let nextState = merge({}, state);
+      nextState.items.push(action.payload);
+      return nextState;
     default:
       return state;
   }
@@ -33,3 +38,11 @@ export const loadInitialProfiles = () => {
   };
 };
 
+export const addProfile = (user) => {
+  return dispatch => {
+    dispatch({
+      type: ADD_PROFILE,
+      payload: user
+    })
+  }
+}

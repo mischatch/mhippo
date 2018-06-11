@@ -3,6 +3,10 @@ import Icon from '../../components/icon';
 import Icon2 from '../../components/icon2';
 import Select from 'react-select';
 import { statesOptions } from '../../components/selectors';
+import { bindActionCreators } from 'redux';
+import { addProfile } from '../../modules/profiles';
+import { connect } from 'react-redux';
+
 
 class NewProfile extends Component {
   constructor(props){
@@ -15,7 +19,7 @@ class NewProfile extends Component {
       city: '',
       state: '',
       bio: '',
-
+      socialProfiles: [],
     };
 
     this.icons = ['facebook', 'twitter', 'instagram', 'linkedin', 'google'];
@@ -33,9 +37,7 @@ class NewProfile extends Component {
   }
 
   handleSelection(e){
-    this.setState({
-      state: e.value,
-    });
+    e ? this.setState({ state: e.value }) : this.setState({ state: '' });
   }
 
   renderPic(){
@@ -49,8 +51,11 @@ class NewProfile extends Component {
     }
   }
 
-  handleSubmit(){
-
+  handleSubmit(e){
+    e.preventDefault();
+    const newProfile = this.state;
+    this.props.addProfile(newProfile);
+    this.props.modalClose();
   }
 
   render(){
@@ -89,9 +94,10 @@ class NewProfile extends Component {
               value={this.state.city}
               onChange={this.handleChange} />
             <Select
-              className='Rectangle-4  state'
+              className='menu-outer-top'
               name='state'
               placeholder='State'
+              autoFocus
               value={this.state.state}
               onChange={this.handleSelection}
               options={statesOptions}/>
@@ -104,6 +110,7 @@ class NewProfile extends Component {
             onChange={this.handleChange} />
           <label className='profiles'> Social Profiles</label>
           <div className='social-profiles'>
+            // TODO: add click handler to icon to add
             { this.icons.map((name, idx) => <Icon2 iconName={name} type='off' key={idx} />) }
           </div>
           <div className='new-prof-btns'>
@@ -116,4 +123,12 @@ class NewProfile extends Component {
   }
 }
 
-export default NewProfile;
+// export default NewProfile;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addProfile: (user) => dispatch(addProfile(user)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NewProfile);
