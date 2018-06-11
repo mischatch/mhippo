@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from './icon'
+import Icon2 from './icon2'
 
 
 const Nav = props => (
@@ -12,9 +13,11 @@ const Nav = props => (
       <div className="nav-bar__search-container textbox-with-icon-container">
         <Icon iconName="search-icon" />
         <input type="text" placeholder="search" className="nav-bar__search textbox" />
-        <button onClick={props.modalOpen}>+ Add New Profile</button>
       </div>
     </div>
+    <button onClick={props.modalOpen} className='add-profile'>
+      <Icon2 iconName="add" /><span>Add New Profile</span>
+    </button>
   </div>
 );
 

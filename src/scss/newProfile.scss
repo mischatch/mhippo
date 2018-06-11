@@ -93,3 +93,49 @@ textarea.Rectangle-4 {
   height: 600px;
   z-index: 15;
 }
+
+.profiles {
+  margin-top: 15px;
+  font-size: 16px;
+  align-self: flex-start;
+  margin-left: 110px;
+}
+
+form > .social-profiles {
+  margin-top: 8px;
+  align-self: flex-start;
+  margin-left: 110px;
+}
+
+.new-prof-btns {
+  margin-top: 30px;
+  width: 235px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-prof-btns > button:first-child {
+  width: 110px;
+  height: 31px;
+  border-radius: 10px;
+  background-color: #bfbfbf;
+  border: solid 1px #bfbfbf;
+  color: #ffffff;
+  opacity: 0.5;
+}
+
+.new-prof-btns > button:last-child {
+  width: 110px;
+  height: 31px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: solid 1px #22a7f0;
+  color: #22a7f0;
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}

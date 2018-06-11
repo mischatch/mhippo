@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Icon from '../../components/icon';
+import Icon2 from '../../components/icon2';
 
 
 class ProfileItem extends Component {
@@ -18,13 +18,13 @@ class ProfileItem extends Component {
               <p className='name'>{name}</p>
               <p className='occupation'>{occupation}</p>
             </div>
-            <div>
-              {socialProfiles.map((icon, idx) => <Icon iconName={icon} key={idx} />)}
+            <div className='social-profiles'>
+              {socialProfiles.map((icon, idx) => <Icon2 iconName={icon} key={idx} />)}
             </div>
           </div>
 
           <div className='location'>
-            <span><Icon iconName="location-icon" /></span> <span>{city}</span>, <span>{state}</span>
+            <span><Icon2 iconName="location" /></span> <span>{city}</span>, <span>{state}</span>
           </div>
           <div className='bio'>
             <p>{bio}</p>

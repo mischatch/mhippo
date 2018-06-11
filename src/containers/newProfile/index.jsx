@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Icon from '../../components/icon';
+import Icon2 from '../../components/icon2';
 import Select from 'react-select';
 import { statesOptions } from '../../components/selectors';
 
@@ -16,6 +17,8 @@ class NewProfile extends Component {
       bio: '',
 
     };
+
+    this.icons = ['facebook', 'twitter', 'instagram', 'linkedin', 'google'];
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,6 +61,7 @@ class NewProfile extends Component {
       <div className='Rectangle-2'>
         <h1 className='Add-New-Profile'>Add New Profile</h1>
         <div className='Oval'>{this.renderPic()}</div>
+        <div className='close' onClick={this.props.modalClose}><Icon2 iconName='close' /></div>
         <form onSubmit={this.handleSubmit}>
           <input
             className='Rectangle-4'
@@ -98,16 +102,14 @@ class NewProfile extends Component {
             placeholder='Short Bio (500 characters max)'
             value={this.state.bio}
             onChange={this.handleChange} />
-          <label> Social Profiles</label>
-          <div>
-            <Icon iconName='facebook-icon-off'  />
-            <Icon iconName='twitter-icon-off' />
-            <Icon iconName='instagram-icon-off' />
-            <Icon iconName='google-icon-off'  />
+          <label className='profiles'> Social Profiles</label>
+          <div className='social-profiles'>
+            { this.icons.map((name, idx) => <Icon2 iconName={name} type='off' key={idx} />) }
           </div>
-
-          <button onClick={this.handleSubmit} disabled={disabled}>Save</button>
-          <button onClick={this.props.closeModal}>Cancel</button>
+          <div className='new-prof-btns'>
+            <button onClick={this.handleSubmit} disabled={disabled}>Save</button>
+            <button onClick={this.props.closeModal}>Cancel</button>
+          </div>
         </form>
       </div>
     );

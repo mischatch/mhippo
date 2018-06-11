@@ -118,3 +118,18 @@ button {
   color: $darkRed;
   border: 1px solid $darkRed;
 }
+
+.social-profiles {
+  margin-right: -15px;
+}
+
+.social-profiles > .icon > img {
+  width: 30px;
+  height: 30px;
+  max-width: 30px;
+  margin-left: -30px;
+}
+
+.social-profiles > .icon {
+  width: 35px;
+}
