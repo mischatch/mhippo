@@ -43,8 +43,9 @@ class Home extends Component {
   handleSearch(name){
     let filtred = [];
     filtred = this.state.allPeople.filter(user => {
-      let fname = user.name.split(' ')[0];
-      let lname = user.name.split(' ')[1];
+      let fname = user.name.split(' ')[0].toLowerCase();
+      let lname = user.name.split(' ')[1].toLowerCase();
+      name = name.toLowerCase();
       let find = fname.startsWith(name) || lname.startsWith(name);
       return find;
     });
