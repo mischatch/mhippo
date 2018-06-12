@@ -1,0 +1,32 @@
+.delete-modal {
+  width: 543px;
+  height: 214px;
+  border-radius: 30px;
+  background-color: #f8f8f8;
+  box-shadow: 0 16px 29px 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-modal > h1 {
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.delete-modal > p {
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+.delete-modal > .close > .icon {
+  right: 25px;
+  top: 25px;
+}
+
+.delete-btns {
+  width: 245px;
+  display: flex;
+  justify-content: space-between;
+}

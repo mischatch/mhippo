@@ -16,6 +16,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   let nextState;
+  nextState = merge({}, state);
+  const { items } = nextState;
+
   switch (action.type) {
     case LOAD_PROFILES:
       return {
@@ -27,10 +30,7 @@ export default (state = initialState, action) => {
       nextState.items.push(action.payload);
       return nextState;
     case DELETE_PROFILE:
-      // debugger
-      nextState = merge({}, state);
       let name = action.payload;
-      const { items } = nextState;
       let newItems = [];
       newItems = items.filter(user => user.name !== name);
       nextState.items = newItems;

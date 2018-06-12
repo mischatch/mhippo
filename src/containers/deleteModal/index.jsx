@@ -1,12 +1,16 @@
 import React from 'react';
+import Icon2 from '../../components/icon2';
 
 const DeleteModal = (props) => {
   return (
-    <div>
+    <div className='delete-modal'>
+      <div className='close' onClick={() => props.handleDeleteModal('')}><Icon2 iconName='close' /></div>
       <h1>Delete Profile</h1>
-      <p>Are you sure you want to delete {props.name}</p>
-      <button onClick={props.deleteProfile}>Delete Profile</button>
-      <button onClick={props.handleDelete}>Cancel</button>
+      <p>Are you sure you want to delete <b>{props.name}</b></p>
+      <div className='delete-btns'>
+        <button className='main' onClick={props.handleDelete}>Yes</button>
+        <button className='empty' onClick={() => props.handleDeleteModal('')}>No</button>
+      </div>
     </div>
   );
 };

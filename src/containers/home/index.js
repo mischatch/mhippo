@@ -19,41 +19,70 @@ class Home extends Component {
       modalOpen: false,
       deleteModal: false,
       deleteName: '',
+      allPeople: [],
+      search: [],
     };
 
     this.handleModal = this.handleModal.bind(this);
     this.handleDeleteModal = this.handleDeleteModal.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentWillMount(){
     this.props.loadInitialProfiles();
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      allPeople: nextProps.profileItems,
+      search: nextProps.profileItems,
+    });
+  }
+
+  handleSearch(name){
+    let filtred = [];
+    filtred = this.state.allPeople.filter(user => {
+      let fname = user.name.split(' ')[0];
+      let lname = user.name.split(' ')[1];
+      let find = fname.startsWith(name) || lname.startsWith(name);
+      return find;
+    });
+    name === '' ? this.setState({ search: this.state.allPeople }) : this.setState({search: filtred});
+  }
+
   handleModal(){
-    this.state.modalOpen ? this.setState({ modalOpen: false }) : this.setState({ modalOpen: true });
+    this.state.modalOpen ?
+    this.setState({ modalOpen: false })
+    : this.setState({ modalOpen: true });
   }
 
   handleDeleteModal(name){
-    this.state.deleteModal ? this.setState({ deleteModal: false, deleteName: '' }) : this.setState({ deleteModal: true, deleteName: name });
+    this.state.deleteModal ?
+    this.setState({ deleteModal: false, deleteName: name })
+    : this.setState({ deleteModal: true, deleteName: name });
   }
 
   handleDelete(){
     const name = this.state.deleteName;
     this.props.deleteProfile(name);
+    this.handleDeleteModal();
   }
 
   render(){
-    const { profileItems, loadInitialProfiles, deleteProfile } = this.props;
+    if(!this.props.profileItems){
+      return null;
+    }
+    const { deleteProfile, searchProfile } = this.props;
 
     return (
       <div>
-        <Nav handleModal={this.handleModal} />
+        <Nav handleModal={this.handleModal} handleSearch={this.handleSearch} />
 
         <div className="mainContent">
-          <h1>User Profiles({profileItems.length})</h1>
+          <h1>User Profiles({this.state.search.length})</h1>
           <div className='profiles'>
-            {profileItems.map((item, idx) => (
+            {this.state.search.map((item, idx) => (
               <ProfileItem key={idx} data={item} handleDeleteModal={this.handleDeleteModal}/>
             ))}
           </div>
@@ -77,7 +106,10 @@ class Home extends Component {
         onRequestClose={this.handleDeleteModal}
         style={customStyles} >
 
-          <DeleteModal name={this.state.name} handleDelete={this.handleDelete}/>
+          <DeleteModal
+            name={this.state.deleteName}
+            handleDelete={this.handleDelete}
+            handleDeleteModal={this.handleDeleteModal} />
 
         </Modal>
 
