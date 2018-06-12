@@ -3,6 +3,9 @@ import Icon2 from '../../components/icon2';
 
 
 class ProfileItem extends Component {
+  constructor(props){
+    super(props);
+  }
 
   render(){
     const { bio, city, name, occupation, picUrl, socialProfiles, state } = this.props.data;
@@ -32,7 +35,7 @@ class ProfileItem extends Component {
           <div className='btns'>
             <button className='main'>View Details</button>
             <button className='empty'>Edit</button>
-            <button className='red'>Delete</button>
+            <button onClick={() => this.props.handleDeleteModal(name)} className='red'>Delete</button>
           </div>
         </div>
       </div>

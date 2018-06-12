@@ -6,6 +6,7 @@ export const OPEN_MODAL = 'profiles/OPEN_MODAL';
 export const CLOSE_MODAL = 'profiles/CLOSE_MODAL';
 export const SEARCH_CHANGE = 'profiles/SEARCH_CHANGE';
 export const ADD_PROFILE = 'profiles/ADD_PROFILE';
+export const DELETE_PROFILE = 'profiles/DELETE_PROFILE';
 
 const initialState = {
   items: [],
@@ -14,6 +15,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  let nextState;
   switch (action.type) {
     case LOAD_PROFILES:
       return {
@@ -21,8 +23,17 @@ export default (state = initialState, action) => {
         items: action.payload,
       };
     case ADD_PROFILE:
-      let nextState = merge({}, state);
+      nextState = merge({}, state);
       nextState.items.push(action.payload);
+      return nextState;
+    case DELETE_PROFILE:
+      // debugger
+      nextState = merge({}, state);
+      let name = action.payload;
+      const { items } = nextState;
+      let newItems = [];
+      newItems = items.filter(user => user.name !== name);
+      nextState.items = newItems;
       return nextState;
     default:
       return state;
@@ -43,6 +54,14 @@ export const addProfile = (user) => {
     dispatch({
       type: ADD_PROFILE,
       payload: user
+    })
+  }
+}
+export const deleteProfile = (name) => {
+  return dispatch => {
+    dispatch({
+      type: DELETE_PROFILE,
+      payload: name
     })
   }
 }

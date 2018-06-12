@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Icon from '../../components/icon';
 import Icon2 from '../../components/icon2';
 import Select from 'react-select';
 import { statesOptions } from '../../components/selectors';
@@ -13,8 +12,8 @@ class NewProfile extends Component {
     super(props);
 
     this.state = {
-      url: '',
-      names: '',
+      picUrl: '',
+      name: '',
       occupation: '',
       city: '',
       state: '',
@@ -22,12 +21,14 @@ class NewProfile extends Component {
       socialProfiles: [],
     };
 
-    this.icons = ['facebook', 'twitter', 'instagram', 'linkedin', 'google'];
+    this.icons = {'facebook': false, 'twitter': false, 'instagram': false, 'linkedin': false, 'google': false};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
+    this.handleSocial = this.handleSocial.bind(this);
     this.renderPic = this.renderPic.bind(this);
+    this.switchIcon = this.switchIcon.bind(this);
   }
 
   handleChange(e){
@@ -38,6 +39,21 @@ class NewProfile extends Component {
 
   handleSelection(e){
     e ? this.setState({ state: e.value }) : this.setState({ state: '' });
+  }
+
+  handleSocial(e){
+    // debugger
+    const iconsObj = this.icons;
+    iconsObj[e] ? iconsObj[e] = false : iconsObj[e] = true;
+    let icons = [];
+    for(let name in iconsObj){
+      if(iconsObj[name]){
+        icons.push(name);
+      }
+    }
+    this.setState({
+      socialProfiles: icons
+    });
   }
 
   renderPic(){
@@ -58,27 +74,40 @@ class NewProfile extends Component {
     this.props.modalClose();
   }
 
+  switchIcon(name, idx){
+    if(this.icons[name]){
+      return (
+        <Icon2 iconName={name} key={idx} />
+      );
+    } else {
+      return (
+        <Icon2 iconName={name} type='off' key={idx} />
+      );
+    }
+  }
+
   render(){
-    const { url, names, occupation, city, state, bio } = this.state;
-    let disabled = !url || !names || !occupation || !city || !state || !bio;
+    const { picUrl, name, occupation, city, state, bio } = this.state;
+    let disabled = !picUrl || !name || !occupation || !city || !state || !bio;
+    // let disabled = false;
 
     return (
       <div className='Rectangle-2'>
         <h1 className='Add-New-Profile'>Add New Profile</h1>
         <div className='Oval'>{this.renderPic()}</div>
-        <div className='close' onClick={this.props.modalClose}><Icon2 iconName='close' /></div>
+        <div className='close' onClick={this.props.handleModal}><Icon2 iconName='close' /></div>
         <form onSubmit={this.handleSubmit}>
           <input
             className='Rectangle-4'
-            name='url'
+            name='picUrl'
             placeholder='Picture URL'
-            value={this.state.url}
+            value={this.state.picUrl}
             onChange={this.handleChange} />
           <input
             className='Rectangle-4'
-            name='names'
-            placeholder='Names'
-            value={this.state.names}
+            name='name'
+            placeholder='Name'
+            value={this.state.name}
             onChange={this.handleChange} />
           <input
             className='Rectangle-4'
@@ -110,12 +139,13 @@ class NewProfile extends Component {
             onChange={this.handleChange} />
           <label className='profiles'> Social Profiles</label>
           <div className='social-profiles'>
-            // TODO: add click handler to icon to add
-            { this.icons.map((name, idx) => <Icon2 iconName={name} type='off' key={idx} />) }
+            { Object.keys(this.icons).map((name, idx) => <span onClick={() => this.handleSocial(name)} >
+            { this.switchIcon(name, idx) }
+            </span> ) }
           </div>
           <div className='new-prof-btns'>
             <button onClick={this.handleSubmit} disabled={disabled}>Save</button>
-            <button onClick={this.props.closeModal}>Cancel</button>
+            <button onClick={this.props.handleModal}>Cancel</button>
           </div>
         </form>
       </div>
@@ -123,7 +153,6 @@ class NewProfile extends Component {
   }
 }
 
-// export default NewProfile;
 
 const mapDispatchToProps = dispatch => {
   return {

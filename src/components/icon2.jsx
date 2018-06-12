@@ -2,16 +2,16 @@ import React from 'react';
 
 const Icon2 = (props) => {
   const { type } = props;
-  if (type === 'off'){
+  if (type){
     return (
       <span className="icon">
-        <img src={`/images/${props.iconName}-icon-off.svg`} />
+        <img alt={props.iconName} src={`/images/${props.iconName}-icon-off.svg`} />
       </span>
     );
   } else {
     return (
       <span className="icon">
-        <img src={`/images/${props.iconName}-icon.svg`} />
+        <img alt={props.iconName} src={`/images/${props.iconName}-icon.svg`} />
       </span>
     );
   }

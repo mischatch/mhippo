@@ -15,7 +15,7 @@ const Nav = props => (
         <input type="text" placeholder="search" className="nav-bar__search textbox" />
       </div>
     </div>
-    <button onClick={props.modalOpen} className='add-profile'>
+    <button onClick={props.handleModal} className='add-profile'>
       <Icon2 iconName="add" /><span>Add New Profile</span>
     </button>
   </div>
