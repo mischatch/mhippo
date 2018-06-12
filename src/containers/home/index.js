@@ -34,10 +34,10 @@ class Home extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    this.setState({
+    setTimeout(() => this.setState({
       allPeople: nextProps.profileItems,
       search: nextProps.profileItems,
-    });
+    }), 1000);
   }
 
   handleSearch(name){
@@ -70,17 +70,14 @@ class Home extends Component {
   }
 
   render(){
-    if(!this.props.profileItems){
-      return null;
-    }
     const { deleteProfile, searchProfile } = this.props;
-
+    let loading = this.state.search.length === 0 && this.state.allPeople.length === 0;
     return (
       <div>
         <Nav handleModal={this.handleModal} handleSearch={this.handleSearch} />
 
         <div className="mainContent">
-          <h1>User Profiles({this.state.search.length})</h1>
+          { loading ? <h1>Loading Results ... </h1> : <h1>User Profiles({this.state.search.length})</h1>}
           <div className='profiles'>
             {this.state.search.map((item, idx) => (
               <ProfileItem key={idx} data={item} handleDeleteModal={this.handleDeleteModal}/>
