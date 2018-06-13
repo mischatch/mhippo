@@ -37,11 +37,11 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    scrollToComponent(this.Top, { offset: 0, align: 'top', duration: 1500});
+    scrollToComponent(this.Top, { offset: 0, align: 'top', duration: 1000});
   }
 
   scrollToTopWithCallback() {
-    scrollToComponent(this.Top, { offset: 0, align: 'top', duration: 1500});
+    scrollToComponent(this.Top, { offset: 0, align: 'top', duration: 1000});
   }
 
   componentWillReceiveProps(nextProps){
@@ -97,7 +97,7 @@ class Home extends Component {
           <h1>User Profiles({this.state.search.length})</h1>
           {zeroResults ? <p>Sorry, no results found for <b>"{this.state.searchName}"</b></p> : null}
           <div className='profiles'>
-            {this.state.search.map((item, idx) => (
+            {this.state.search.sort((a, b) => a.name > b.name).map((item, idx) => (
               <ProfileItem key={idx} data={item} handleDeleteModal={this.handleDeleteModal}/>
             ))}
           </div>
