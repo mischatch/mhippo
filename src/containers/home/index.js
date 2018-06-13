@@ -21,6 +21,7 @@ class Home extends Component {
       deleteName: '',
       allPeople: [],
       search: [],
+      searchName: '',
     };
 
     this.handleModal = this.handleModal.bind(this);
@@ -34,10 +35,10 @@ class Home extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    setTimeout(() => this.setState({
+    this.setState({
       allPeople: nextProps.profileItems,
       search: nextProps.profileItems,
-    }), 1000);
+    });
   }
 
   handleSearch(name){
@@ -45,11 +46,11 @@ class Home extends Component {
     filtred = this.state.allPeople.filter(user => {
       let fname = user.name.split(' ')[0].toLowerCase();
       let lname = user.name.split(' ')[1].toLowerCase();
-      name = name.toLowerCase();
-      let find = fname.startsWith(name) || lname.startsWith(name);
+      let uniName = name.toLowerCase();
+      let find = fname.startsWith(uniName) || lname.startsWith(uniName);
       return find;
     });
-    name === '' ? this.setState({ search: this.state.allPeople }) : this.setState({search: filtred});
+    name === '' ? this.setState({ search: this.state.allPeople, searchName: '' }) : this.setState({search: filtred, searchName: name});
   }
 
   handleModal(){
@@ -72,13 +73,14 @@ class Home extends Component {
 
   render(){
     const { deleteProfile, searchProfile } = this.props;
-    let loading = this.state.search.length === 0 && this.state.allPeople.length === 0;
+    let zeroResults = this.state.search.length === 0 && this.state.allPeople.length !== 0;
     return (
       <div>
         <Nav handleModal={this.handleModal} handleSearch={this.handleSearch} />
 
         <div className="mainContent">
-          { loading ? <h1>Loading Results ... </h1> : <h1>User Profiles({this.state.search.length})</h1>}
+          <h1>User Profiles({this.state.search.length})</h1>
+          {zeroResults ? <p>Sorry, no results found for <b>"{this.state.searchName}"</b></p> : null}
           <div className='profiles'>
             {this.state.search.map((item, idx) => (
               <ProfileItem key={idx} data={item} handleDeleteModal={this.handleDeleteModal}/>
@@ -101,7 +103,7 @@ class Home extends Component {
         contentLabel="deleteModal"
         ariaHideApp={false}
         isOpen={this.state.deleteModal}
-        onRequestClose={this.handleDeleteModal}
+        onRequestClose={() => this.handleDeleteModal('')}
         style={customStyles} >
 
           <DeleteModal

@@ -139,7 +139,7 @@ class NewProfile extends Component {
             onChange={this.handleChange} />
           <label className='profiles'> Social Profiles</label>
           <div className='social-profiles'>
-            { Object.keys(this.icons).map((name, idx) => <span onClick={() => this.handleSocial(name)} >
+            { Object.keys(this.icons).map((name, idx) => <span key={idx} onClick={() => this.handleSocial(name)} >
             { this.switchIcon(name, idx) }
             </span> ) }
           </div>
