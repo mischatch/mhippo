@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
 import Icon2 from '../../components/icon2';
+import Modal from 'react-modal';
+import { customStyles } from '../../components/selectors';
+import EditProfile from '../editProfile';
+import NewProfile from '../newProfile';
 
 
 class ProfileItem extends Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      modalOpen: false,
+    };
+
+    this.handleModal = this.handleModal.bind(this);
+  }
+
+  handleModal(){
+    this.state.modalOpen ?
+    this.setState({ modalOpen: false })
+    : this.setState({ modalOpen: true });
   }
 
   render(){
@@ -34,10 +50,22 @@ class ProfileItem extends Component {
           </div>
           <div className='btns'>
             <button className='main'>View Details</button>
-            <button className='empty'>Edit</button>
+            <button onClick={this.handleModal} className='empty'>Edit</button>
             <button onClick={() => this.props.handleDeleteModal(name)} className='red'>Delete</button>
           </div>
         </div>
+
+        <Modal
+        contentLabel="Modal"
+        ariaHideApp={false}
+        isOpen={this.state.modalOpen}
+        onRequestClose={this.handleModal}
+        style={customStyles} >
+
+          <EditProfile user={this.props.data} handleModal={this.handleModal} />
+
+        </Modal>
+
       </div>
     );
   }

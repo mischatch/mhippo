@@ -7,6 +7,7 @@ export const CLOSE_MODAL = 'profiles/CLOSE_MODAL';
 export const SEARCH_CHANGE = 'profiles/SEARCH_CHANGE';
 export const ADD_PROFILE = 'profiles/ADD_PROFILE';
 export const DELETE_PROFILE = 'profiles/DELETE_PROFILE';
+export const EDIT_PROFILE = 'profiles/EDIT_PROFILE';
 
 const initialState = {
   items: [],
@@ -35,6 +36,18 @@ export default (state = initialState, action) => {
       newItems = items.filter(user => user.name !== name);
       nextState.items = newItems;
       return nextState;
+    case EDIT_PROFILE:
+      let profile = action.payload;
+      let old = action.diff;
+      let updatedItems = items.map(prof => {
+        if(prof.name === old.name){
+          return profile;
+        } else {
+          return prof;
+        }
+      })
+      nextState.items = updatedItems;
+      return nextState;
     default:
       return state;
   }
@@ -62,6 +75,15 @@ export const deleteProfile = (name) => {
     dispatch({
       type: DELETE_PROFILE,
       payload: name
+    })
+  }
+}
+export const editProfile = (profile, old) => {
+  return dispatch => {
+    dispatch({
+      type: EDIT_PROFILE,
+      payload: profile,
+      diff: old,
     })
   }
 }

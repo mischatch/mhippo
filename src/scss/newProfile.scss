@@ -11,6 +11,16 @@
   border-radius: 50%;
 }
 
+.image-err {
+  width: 54px;
+  height: 67px !important;
+  font-size: 11px;
+  overflow: hidden;
+  text-align: center;
+  padding: 13px 0 0 6px;
+  color: #d24040;
+}
+
 .Rectangle-2 {
   width: 543px;
   height: 540px;
@@ -53,6 +63,8 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 9px;
+  position: relative;
+  width: 340px;
 }
 
 .city {
@@ -66,6 +78,8 @@
 .state {
   width: 80px;
   margin-left: 10px;
+  position: absolute;
+  right: 0;
 }
 
 .Rectangle-2 > form {
@@ -124,7 +138,7 @@ form > .social-profiles {
   justify-content: space-between;
 }
 
-.new-prof-btns > button:first-child {
+.disabled {
   width: 110px;
   height: 31px;
   border-radius: 10px;
@@ -150,47 +164,37 @@ form > .social-profiles {
   cursor: pointer;
 }
 
-.Select-option {
-  z-index: 20;
+.Select {
+  width: 80px;
+  position: absolute;
+  right: 0;
 }
 
-.Select-option:nth-child(n+6) {
-  display: none;
-}
-.Select-option:last-child,
-.Select-option:nth-child(5) {
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-
-span.Select-multi-value-wrapper {
-  position: relative;
+.Select-control {
+  height: 31px;
+  color: #4a4a4a;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: solid 1px #bfbfbf;
+  padding: 0 0 0 10px;
 }
 
 .Select-input {
-  display: inline-block;
-  position: absolute;
-  top: -24px;
+  height: 29px;
+  max-width: 40px;
 }
 
-.Select-input > input {
-  width: 81px;
-  margin-left: -12px;
-  border-radius: 12px;
-  border: none;
+.Select-placeholder {
+  line-height: 30px;
+  color: #757575;
 }
 
-.Select-menu-outer {
-  z-index: 20;
-  background: white;
-  width: 80px;
-  margin-left: -12px;
+.Select-clear {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #bdbaba;
 }
 
-.menu-outer-top .Select-menu-outer {
-    bottom: 35px!important;
-    border-bottom-right-radius: 0px!important;
-    border-bottom-left-radius: 0px!important;
-    border-top-right-radius: 4px!important;
-    border-top-left-radius: 4px!important;
+.Select-value-label {
+  color: #777;
 }

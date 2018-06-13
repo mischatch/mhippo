@@ -3,11 +3,11 @@ import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import Modal from 'react-modal';
 import { loadInitialProfiles, deleteProfile } from '../../modules/profiles';
+import Modal from 'react-modal';
+import { customStyles } from '../../components/selectors';
 import Nav from '../../components/nav';
 import ProfileItem from '../profileItem';
-import { customStyles } from '../../components/selectors';
 import NewProfile from '../newProfile';
 import DeleteModal from '../deleteModal';
 import scrollToComponent from 'react-scroll-to-component';
@@ -34,10 +34,6 @@ class Home extends Component {
 
   componentWillMount(){
     this.props.loadInitialProfiles();
-  }
-
-  componentDidMount(){
-    scrollToComponent(this.Top, { offset: 0, align: 'top', duration: 1000});
   }
 
   scrollToTopWithCallback() {

@@ -3,32 +3,21 @@ import Icon2 from '../../components/icon2';
 import Select from 'react-select';
 import { statesOptions } from '../../components/selectors';
 import { bindActionCreators } from 'redux';
-import { addProfile } from '../../modules/profiles';
+import { editProfile } from '../../modules/profiles';
 import { connect } from 'react-redux';
 import 'react-select/dist/react-select.css';
 
 
 
-class NewProfile extends Component {
+class EditProfile extends Component {
   constructor(props){
     super(props);
 
-    if(this.props.user){
-      this.state = this.props.user;
-    } else {
-      this.state = {
-        picUrl: '',
-        name: '',
-        occupation: '',
-        city: '',
-        state: '',
-        bio: '',
-        socialProfiles: [],
-      };
-    }
-
+    this.state = this.props.user;
 
     this.icons = {'facebook': false, 'twitter': false, 'instagram': false, 'linkedin': false, 'google': false};
+
+    this.state.socialProfiles.forEach(prof => this.icons[prof] = true);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,6 +38,7 @@ class NewProfile extends Component {
   }
 
   handleSocial(e){
+    // debugger
     const iconsObj = this.icons;
     iconsObj[e] ? iconsObj[e] = false : iconsObj[e] = true;
     let icons = [];
@@ -63,6 +53,7 @@ class NewProfile extends Component {
   }
 
   renderPic(){
+    // debugger
     let url = this.state.picUrl;
     if(url !== ''){
       var myRegex = /(https?:\/\/.*\.(?:png|jpg))/i;
@@ -73,7 +64,7 @@ class NewProfile extends Component {
       } else {
         return (
           <div className='image-err'>Not an image url</div>
-        )
+        );
       }
     } else {
       return null;
@@ -82,8 +73,9 @@ class NewProfile extends Component {
 
   handleSubmit(e){
     e.preventDefault();
+    const oldProfile = this.props.user;
     const newProfile = this.state;
-    this.props.addProfile(newProfile);
+    this.props.editProfile(newProfile, oldProfile);
     this.props.handleModal();
   }
 
@@ -176,8 +168,8 @@ class NewProfile extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addProfile: (user) => dispatch(addProfile(user)),
+    editProfile: (user, old) => dispatch(editProfile(user, old)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(NewProfile);
+export default connect(null, mapDispatchToProps)(EditProfile);
