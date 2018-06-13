@@ -63,3 +63,11 @@ export const statesOptions = [
   { value:'WI', label: 'WI'},
   { value:'WY', label: 'WY'}
 ];
+
+export const capitalize = (name) => {
+  if (name.trim() === ''){
+    return '';
+  } else {
+    return name[0].toUpperCase() + name.slice(1).toLowerCase();
+  }
+};

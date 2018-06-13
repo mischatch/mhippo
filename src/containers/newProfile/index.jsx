@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Icon2 from '../../components/icon2';
 import Select from 'react-select';
-import { statesOptions } from '../../components/selectors';
+import { statesOptions, capitalize } from '../../components/selectors';
 import { bindActionCreators } from 'redux';
 import { addProfile } from '../../modules/profiles';
 import { connect } from 'react-redux';
@@ -39,8 +39,13 @@ class NewProfile extends Component {
   }
 
   handleChange(e){
+    const name = e.target.name;
+    let val = e.target.value;
+    if(name === 'name' || name === 'occupation' || name === 'city'){
+      val = val.split(' ').map(word => capitalize(word)).join(' ');
+    }
     this.setState({
-      [e.target.name]: e.target.value,
+      [name]: val,
     });
   }
 
