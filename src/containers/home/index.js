@@ -10,6 +10,7 @@ import ProfileItem from '../profileItem';
 import { customStyles } from '../../components/selectors';
 import NewProfile from '../newProfile';
 import DeleteModal from '../deleteModal';
+import scrollToComponent from 'react-scroll-to-component';
 
 class Home extends Component {
   constructor(props){
@@ -28,10 +29,19 @@ class Home extends Component {
     this.handleDeleteModal = this.handleDeleteModal.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.scrollToTopWithCallback = this.scrollToTopWithCallback.bind(this);
   }
 
   componentWillMount(){
     this.props.loadInitialProfiles();
+  }
+
+  componentDidMount(){
+    scrollToComponent(this.Top, { offset: 0, align: 'top', duration: 1500});
+  }
+
+  scrollToTopWithCallback() {
+    scrollToComponent(this.Top, { offset: 0, align: 'top', duration: 1500});
   }
 
   componentWillReceiveProps(nextProps){
@@ -47,7 +57,8 @@ class Home extends Component {
       let fname = user.name.split(' ')[0].toLowerCase();
       let lname = user.name.split(' ')[1].toLowerCase();
       let uniName = name.toLowerCase();
-      let find = fname.startsWith(uniName) || lname.startsWith(uniName);
+      let uniBio = user.bio.toLowerCase();
+      let find = fname.startsWith(uniName) || lname.startsWith(uniName) || uniBio.includes(uniName);
       return find;
     });
     name === '' ? this.setState({ search: this.state.allPeople, searchName: '' }) : this.setState({search: filtred, searchName: name});
@@ -76,7 +87,11 @@ class Home extends Component {
     let zeroResults = this.state.search.length === 0 && this.state.allPeople.length !== 0;
     return (
       <div>
-        <Nav handleModal={this.handleModal} handleSearch={this.handleSearch} />
+        <section ref={(section) => { this.Top = section; }}></section>
+        <Nav
+          handleModal={this.handleModal}
+          handleSearch={this.handleSearch}
+          scrollToTopWithCallback={this.scrollToTopWithCallback} />
 
         <div className="mainContent">
           <h1>User Profiles({this.state.search.length})</h1>

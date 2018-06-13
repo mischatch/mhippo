@@ -25,7 +25,7 @@ class Nav extends Component {
   render(){
     return (
       <div className="nav-bar">
-        <a href="#" title="Scroll top" className="nav-bar__logo nav-bar__element">
+        <a onClick={this.props.scrollToTopWithCallback} title="Scroll top" className="nav-bar__logo nav-bar__element">
           <svg role="img"><use xlinkHref="/images/svg-assets.svg#logo"></use></svg>
         </a>
 
