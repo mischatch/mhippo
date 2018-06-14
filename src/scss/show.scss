@@ -1,0 +1,21 @@
+.show-modal {
+  display: flex;
+  width: 660px;
+  background: white;
+  border-radius: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+  padding: 25px;
+}
+
+.show-modal > .close {
+  right: 0px;
+  top: 0px;
+}
+
+.show-modal > .info > .bio > p {
+  background: -webkit-linear-gradient(#333 260%, #eee0 416%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  height: fit-content;
+}

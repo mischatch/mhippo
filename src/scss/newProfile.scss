@@ -23,7 +23,7 @@
 
 .Rectangle-2 {
   width: 543px;
-  height: 540px;
+  // height: 540px;
   border-radius: 30px;
   background-color: #f8f8f8;
   box-shadow: 0 16px 29px 0 rgba(0, 0, 0, 0.3);
@@ -101,6 +101,16 @@ textarea.Rectangle-4 {
   padding: 0 0 0 10px;
 }
 
+.city-container {
+
+}
+
+.city-container > p {
+  margin-left: 12px;
+  margin-top: 1px;
+  margin-bottom: -5px;
+}
+
 .ReactModal__Body--open {
   overflow-y: hidden;
 }
@@ -108,11 +118,11 @@ textarea.Rectangle-4 {
 .ReactModal__Content--after-open {
   border: none;
   background: rgba(255, 255, 255, 0);
-  height: 600px;
+  height: 650px;
   z-index: 15;
 }
 
-.profiles {
+.soc-profiles {
   margin-top: 15px;
   font-size: 16px;
   align-self: flex-start;
@@ -136,6 +146,7 @@ form > .social-profiles {
   width: 235px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
 }
 
 .disabled {
@@ -162,6 +173,17 @@ form > .social-profiles {
   right: 15px;
   top: 15px;
   cursor: pointer;
+}
+
+.show {
+  color: #d0021b;
+  font-size: 13px;
+  align-self: flex-start;
+  margin: -8px 0 3px 111px;
+}
+
+.hidden {
+  display: none;
 }
 
 .Select {

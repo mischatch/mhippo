@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Icon2 from '../../components/icon2';
 import Select from 'react-select';
-import { statesOptions } from '../../components/selectors';
+import { statesOptions, capitalize } from '../../components/selectors';
 import { bindActionCreators } from 'redux';
 import { editProfile } from '../../modules/profiles';
 import { connect } from 'react-redux';
@@ -28,8 +28,13 @@ class EditProfile extends Component {
   }
 
   handleChange(e){
+    const name = e.target.name;
+    let val = e.target.value;
+    if(name === 'name' || name === 'occupation' || name === 'city'){
+      val = val.split(' ').map(word => capitalize(word)).join(' ');
+    }
     this.setState({
-      [e.target.name]: e.target.value,
+      [name]: val,
     });
   }
 
@@ -91,9 +96,22 @@ class EditProfile extends Component {
     }
   }
 
+  handleBlur(e){
+    const name = e.target.name;
+    const shortName = name === 'name' && name.split(' ').length < 2;
+    let errUpd = this.state.errors;
+    if(this.state[name] === '' || shortName){
+      errUpd[name] = false;
+      this.setState({ errors: errUpd});
+    } else {
+      errUpd[name] = true;
+      this.setState({ errors: errUpd});
+    }
+  }
+
   render(){
     const { picUrl, name, occupation, city, state, bio } = this.state;
-    let disabled = !picUrl || !name || !occupation || !city || !state || !bio;
+    let disabled = !name || !occupation || !city || name.split(' ').length < 2;
 
 
     return (
@@ -113,21 +131,26 @@ class EditProfile extends Component {
             name='name'
             placeholder='Name'
             value={this.state.name}
+            onBlur={this.handleBlur}
             onChange={this.handleChange} />
+            <p className={ this.state.errors.name ? 'hidden' : 'show' }>Full name is required</p>
           <input
             className='Rectangle-4'
             name='occupation'
             placeholder='Occupation'
             value={this.state.occupation}
+            onBlur={this.handleBlur}
             onChange={this.handleChange} />
+          <p className={ this.state.errors.occupation ? 'hidden' : 'show' }>Occupation is required</p>
           <div className='city-state'>
             <input
               className='Rectangle-4  city'
               name='city'
               placeholder='City'
               value={this.state.city}
+              onBlur={this.handleBlur}
               onChange={this.handleChange} />
-
+            <p className={ this.state.errors.city ? 'hidden' : 'show' }>City is required</p>
 
             <Select
               className='menu-outer-top'
@@ -138,7 +161,6 @@ class EditProfile extends Component {
               onChange={this.handleSelection}
               options={statesOptions}/>
 
-
           </div>
           <textarea
             className='Rectangle-4'
@@ -146,7 +168,7 @@ class EditProfile extends Component {
             placeholder='Short Bio (500 characters max)'
             value={this.state.bio}
             onChange={this.handleChange} />
-          <label className='profiles'> Social Profiles</label>
+          <label className='soc-profiles'> Social Profiles</label>
           <div className='social-profiles'>
             { Object.keys(this.icons).map((name, idx) => <span key={idx} onClick={() => this.handleSocial(name)} >
             { this.switchIcon(name, idx) }

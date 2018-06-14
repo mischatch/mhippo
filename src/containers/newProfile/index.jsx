@@ -13,20 +13,22 @@ class NewProfile extends Component {
   constructor(props){
     super(props);
 
-    if(this.props.user){
-      this.state = this.props.user;
-    } else {
-      this.state = {
-        picUrl: '',
-        name: '',
-        occupation: '',
-        city: '',
-        state: '',
-        bio: '',
-        socialProfiles: [],
-      };
-    }
-
+    this.state = {
+      picUrl: '',
+      name: '',
+      occupation: '',
+      city: '',
+      state: '',
+      bio: '',
+      socialProfiles: [],
+      errors: {
+        name: true,
+        occupation: true,
+        city: true,
+        state: true,
+        bio: true,
+      }
+    };
 
     this.icons = {'facebook': false, 'twitter': false, 'instagram': false, 'linkedin': false, 'google': false};
 
@@ -36,6 +38,7 @@ class NewProfile extends Component {
     this.handleSocial = this.handleSocial.bind(this);
     this.renderPic = this.renderPic.bind(this);
     this.switchIcon = this.switchIcon.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   handleChange(e){
@@ -78,7 +81,7 @@ class NewProfile extends Component {
       } else {
         return (
           <div className='image-err'>Not an image url</div>
-        )
+        );
       }
     } else {
       return null;
@@ -104,10 +107,22 @@ class NewProfile extends Component {
     }
   }
 
+  handleBlur(e){
+    const name = e.target.name;
+    const shortName = name === 'name' && name.split(' ').length < 2;
+    let errUpd = this.state.errors;
+    if(this.state[name] === '' || shortName){
+      errUpd[name] = false;
+      this.setState({ errors: errUpd});
+    } else {
+      errUpd[name] = true;
+      this.setState({ errors: errUpd});
+    }
+  }
+
   render(){
     const { picUrl, name, occupation, city, state, bio } = this.state;
-    let disabled = !picUrl || !name || !occupation || !city || !state || !bio;
-
+    let disabled = !name || !occupation || !city || name.split(' ').length < 2;
 
     return (
       <div className='Rectangle-2'>
@@ -126,31 +141,35 @@ class NewProfile extends Component {
             name='name'
             placeholder='Name'
             value={this.state.name}
+            onBlur={this.handleBlur}
             onChange={this.handleChange} />
+          <p className={ this.state.errors.name ? 'hidden' : 'show' }>Full name is required</p>
           <input
             className='Rectangle-4'
             name='occupation'
             placeholder='Occupation'
             value={this.state.occupation}
+            onBlur={this.handleBlur}
             onChange={this.handleChange} />
+          <p className={ this.state.errors.occupation ? 'hidden' : 'show' }>Occupation is required</p>
           <div className='city-state'>
-            <input
-              className='Rectangle-4  city'
-              name='city'
-              placeholder='City'
-              value={this.state.city}
-              onChange={this.handleChange} />
-
-
-            <Select
-              className='menu-outer-top'
-              name='state'
-              placeholder='State'
-              autoFocus
-              value={this.state.state}
-              onChange={this.handleSelection}
-              options={statesOptions}/>
-
+            <div className='city-container'>
+              <input
+                className='Rectangle-4  city'
+                name='city'
+                placeholder='City'
+                value={this.state.city}
+                onBlur={this.handleBlur}
+                onChange={this.handleChange} />
+              <p className={ this.state.errors.city ? 'hidden' : 'show' }>City is required</p>
+              </div>
+              <Select
+                className='menu-outer-top'
+                name='state'
+                placeholder='State'
+                value={this.state.state}
+                onChange={this.handleSelection}
+                options={statesOptions}/>
 
           </div>
           <textarea
@@ -159,7 +178,7 @@ class NewProfile extends Component {
             placeholder='Short Bio (500 characters max)'
             value={this.state.bio}
             onChange={this.handleChange} />
-          <label className='profiles'> Social Profiles</label>
+          <label className='soc-profiles'> Social Profiles</label>
           <div className='social-profiles'>
             { Object.keys(this.icons).map((name, idx) => <span key={idx} onClick={() => this.handleSocial(name)} >
             { this.switchIcon(name, idx) }
