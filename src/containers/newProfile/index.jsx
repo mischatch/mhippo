@@ -109,9 +109,9 @@ class NewProfile extends Component {
 
   handleBlur(e){
     const name = e.target.name;
-    const shortName = name === 'name' && name.split(' ').length < 2;
+    const shortName = name === 'name' && this.state.name.split(' ').length < 2;
     let errUpd = this.state.errors;
-    if(this.state[name] === '' || shortName){
+    if(this.state[name].trim() === '' || shortName){
       errUpd[name] = false;
       this.setState({ errors: errUpd});
     } else {
@@ -178,7 +178,7 @@ class NewProfile extends Component {
             placeholder='Short Bio (500 characters max)'
             value={this.state.bio}
             onChange={this.handleChange} />
-          <label className='soc-profiles'> Social Profiles</label>
+          <label className='socprofiles'> Social Profiles</label>
           <div className='social-profiles'>
             { Object.keys(this.icons).map((name, idx) => <span key={idx} onClick={() => this.handleSocial(name)} >
             { this.switchIcon(name, idx) }

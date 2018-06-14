@@ -13,7 +13,23 @@ class EditProfile extends Component {
   constructor(props){
     super(props);
 
-    this.state = this.props.user;
+    const { picUrl, name, occupation, city, state, bio, socialProfiles } = this.props.user;
+
+    this.state = {
+      picUrl,
+      name,
+      occupation,
+      city,
+      state,
+      bio,
+      socialProfiles,
+      errors: {
+        name: true,
+        occupation: true,
+        city: true,
+        bio: true,
+      }
+    };
 
     this.icons = {'facebook': false, 'twitter': false, 'instagram': false, 'linkedin': false, 'google': false};
 
@@ -23,6 +39,7 @@ class EditProfile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
     this.handleSocial = this.handleSocial.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
     this.renderPic = this.renderPic.bind(this);
     this.switchIcon = this.switchIcon.bind(this);
   }
@@ -43,7 +60,6 @@ class EditProfile extends Component {
   }
 
   handleSocial(e){
-    // debugger
     const iconsObj = this.icons;
     iconsObj[e] ? iconsObj[e] = false : iconsObj[e] = true;
     let icons = [];
@@ -58,7 +74,6 @@ class EditProfile extends Component {
   }
 
   renderPic(){
-    // debugger
     let url = this.state.picUrl;
     if(url !== ''){
       var myRegex = /(https?:\/\/.*\.(?:png|jpg))/i;
@@ -143,6 +158,7 @@ class EditProfile extends Component {
             onChange={this.handleChange} />
           <p className={ this.state.errors.occupation ? 'hidden' : 'show' }>Occupation is required</p>
           <div className='city-state'>
+            <div className='city-container'>
             <input
               className='Rectangle-4  city'
               name='city'
@@ -151,7 +167,7 @@ class EditProfile extends Component {
               onBlur={this.handleBlur}
               onChange={this.handleChange} />
             <p className={ this.state.errors.city ? 'hidden' : 'show' }>City is required</p>
-
+            </div>
             <Select
               className='menu-outer-top'
               name='state'
