@@ -39,7 +39,7 @@ class Nav extends Component {
           </div>
         </div>
         <button onClick={this.props.handleModal} className='add-profile'>
-          <Icon2 iconName="add" /><span>Add New Profile</span>
+          <Icon2 iconName="add" /><span className='btn-txt'>Add New Profile</span>
         </button>
       </div>
     )

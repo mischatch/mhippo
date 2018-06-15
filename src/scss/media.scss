@@ -1,0 +1,240 @@
+html, body {
+  margin: 0;
+  min-width: 100%;
+}
+
+$breakpoint-tablet: 780px;
+@media only screen and (max-width: $breakpoint-tablet) {
+  .nav-bar {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-bar__logo {
+  }
+
+  .nav-bar__element {
+
+  }
+
+  .btn-txt {
+    display: none;
+  }
+
+  .add-profile {
+    width: 45px;
+    position: absolute;
+    right: 40px;
+  }
+
+  .add-profile > .icon {
+    margin-left: 6px;
+  }
+
+  .nav-bar__search-container > input {
+    width: 237px;
+  }
+}
+
+$breakpoint-phone: 480px;
+@media only screen and (max-width: $breakpoint-phone) {
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    height: 44px;
+  }
+
+  .search-container {
+    margin-left: -40px;
+  }
+
+  .nav-bar__logo {
+    margin-left: -70px;
+    overflow: hidden;
+    width: 102px;
+  }
+
+  .nav-bar__logo svg {
+    width: 300px;
+  }
+
+  .nav-bar__search-container {
+    margin-left: 20px;
+  }
+
+  .nav-bar__search-container > input {
+    width: 237px;
+  }
+
+  .add-profile {
+    right: 30px;
+  }
+
+  .mainContent {
+    padding: 50px 10px;
+  }
+
+  .mainContent > h1 {
+    margin-left: 15px;
+  }
+
+  .profile {
+    min-width: 0;
+    margin: 10px 0;
+    position: relative;;
+  }
+
+  .info {
+    width: 100%;
+    margin: 0;
+  }
+
+  .image {
+    width: 80px;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+  }
+
+  .profile-top-box {
+    flex-direction: column;
+  }
+
+  .social-profiles {
+    margin-left: 15px;
+    position: absolute;
+    top: 85px;
+  }
+
+  .name {
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .occupation {
+    margin-top: -4px;
+    margin-bottom: 8px;
+  }
+
+  .location {
+    margin-bottom: 47px;
+    font-size: 14px;
+  }
+
+  .location > span > .icon {
+    width: 1.1rem;
+  }
+
+  .bio {
+    font-size: 14px;
+    background: -webkit-linear-gradient(#333 10%, #eee 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    height: 47px;
+  }
+
+  .btns {
+    text-align: center;
+  }
+
+  .btns > button {
+    width: 85px;
+  }
+
+  .btns > button:first-child {
+    width: 102px;
+    margin-right: 12px;
+  }
+
+  .btns > button:last-child {
+    position: relative;
+    margin-left: 12px;
+  }
+
+  .Rectangle-2 {
+    width: 394px;
+  }
+
+  .Add-New-Profile {
+    font-size: 20px;
+    margin: 38px 0 12px 0;
+  }
+
+  .Oval {
+    display: none;
+  }
+
+  .city-state {
+    flex-direction: column;
+  }
+
+  .city-container > input {
+    width: 340px;
+    margin-bottom: 9px;
+  }
+
+  .Select {
+    width: 340px;
+    position: relative;
+  }
+
+  form > .social-profiles {
+    display: flex;
+    position: relative;
+    top: 0;
+    margin-top: 8px;
+    align-self: flex-start;
+    margin-left: 40px;
+    width: 340px;
+  }
+
+  .socprofiles {
+    align-self: flex-start;
+    margin: 12px 0 0 42px;
+    font-size: 14px;
+  }
+
+  .soc-profiles {
+    margin: 12px 0 0 42px;
+    font-size: 14px;
+    align-self: flex-start;
+  }
+
+  .show {
+    color: #d0021b;
+    font-size: 12px;
+    align-self: flex-start;
+    margin: -8px 0 3px 38px;
+  }
+
+  .city-container > p {
+    margin-left: 12px;
+    margin-top: -7px;
+    margin-bottom: 3px;
+  }
+
+  .delete-modal {
+    width: 340px;
+    text-align: center;
+  }
+
+  .delete-modal > h1 {
+    font-size: 23px;
+    margin-bottom: 7px;
+  }
+
+  .delete-modal > p {
+    margin-bottom: 25px;
+    font-size: 18px;
+    width: 200px;
+  }
+
+  .show-modal {
+    width: 390px;
+  }
+
+  .show-modal > .image {
+    top: 35px;
+    right: 35px;
+  }
+}
